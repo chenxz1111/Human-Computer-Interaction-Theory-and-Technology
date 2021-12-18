@@ -267,10 +267,10 @@ RectTransform:
   m_Father: {fileID: 1717631539967318257}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 453.6, y: -209}
-  m_SizeDelta: {x: 160, y: 400}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 453.5, y: 0}
+  m_SizeDelta: {x: 700, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4533224321601188287
 CanvasRenderer:
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
+    m_FontStyle: 3
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 0
@@ -313,74 +313,31 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'a
-
-    b
-
-    c
-
-    d
-
-    efg
-
-    hijklm
-
-    nopqrst
-
-    uvw
-
-    xy
-
-    z
-
-    sda
-
-    sdad
-
-
-    d
-
-    sa
-
-    ds
-
-
-    da
-
-    sd
-
-    a
-
-    d
-
-    d
-
-    ad
-
-    a
-
-    d
-
-    da
-
-    d
-
-    ds
-
-    d
-
-    d
-
-    a
-
-    da
-
-    d
-
-    adasdadada
-
-
-    dsadadadad'
+  m_Text: " When did you last write a letter? Properly write one \u2013 by hand?
+    In a digital world, where sending a text or email is far more convenient than
+    using snail1 mail, is the writing on the wall for traditional pen and paper?
+    Well, some people claim that writing still has many benefits, so maybe it's not
+    time to ditch your ballpoint or fountain pen yet.\r\n \r\nThese days, when people
+    request things in writing, a typed, electronic document will be accepted. Doing
+    this on a computer means it could be saved, edited, duplicated and sent via email.
+    But crafting a handwritten document is unique: It requires planning and thought,
+    and, as well as practising your handwriting, it helps you to remember spelling
+    and punctuation2.\r\n \r\nSome experts believe your brain benefits from using
+    old-fashioned pen and paper. This is particularly relevant for students, where
+    typing notes into a laptop is thought to lack the 'tactile3 feedback' to the
+    brain that contact between pen and paper does. BBC Worklife website quotes Hetty
+    Roessingh from the University of Calgary, who says that \"taking notes by hand
+    involves cognitive4 engagement in summarising, paraphrasing5, organising, concept
+    and vocabulary mapping.\" Others agree that handwriting may boost fine motor
+    skills in your hands and fingers.\r\n \r\nThere are everyday benefits to using
+    pen and paper too. Scribbling6 notes, shopping lists or messages on the back
+    of an envelope can still be useful, quick and portable. But putting pen to paper
+    in a letter to a friend or loved one can probably have the most impact. Pen pal8
+    writer Katherine Moller told the BBC: \"In a world where it is so easy to hop7
+    online to email or to send a fast text, it is so personal and so precious to
+    know someone chose to turn off the virtual world to spend some time with you.\"\r\n\r\nSo,
+    while digital skills remain important, don't write off your pens and pencils
+    yet \u2013 especially if your smartphone, tablet or laptop runs out of power!"
 --- !u!114 &5857258354835455543
 MonoBehaviour:
   m_ObjectHideFlags: 0
