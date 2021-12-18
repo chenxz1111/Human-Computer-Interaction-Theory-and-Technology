@@ -4472,7 +4472,7 @@ GameObject:
   - component: {fileID: 749252113}
   - component: {fileID: 749252114}
   m_Layer: 5
-  m_Name: ButtonBlue
+  m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4574,7 +4574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 564d23b3aeb32eb478c164f1b25d61f8, type: 3}
+  m_Texture: {fileID: 2800000, guid: 68576cbfd089adc4eae2dfa8e63dd802, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6357,7 +6357,7 @@ GameObject:
   - component: {fileID: 1064527483}
   - component: {fileID: 1064527484}
   m_Layer: 5
-  m_Name: ButtonYellow
+  m_Name: ButtonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9279,7 +9279,6 @@ GameObject:
   - component: {fileID: 1360675332}
   - component: {fileID: 1360675334}
   - component: {fileID: 1360675333}
-  - component: {fileID: 1360675335}
   m_Layer: 5
   m_Name: CanvasLeft
   m_TagString: Untagged
@@ -9390,27 +9389,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360675330}
   m_CullTransparentMesh: 1
---- !u!223 &1360675335
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360675330}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!1 &1383585976
 GameObject:
   m_ObjectHideFlags: 0
@@ -9934,7 +9912,7 @@ GameObject:
   - component: {fileID: 1489401947}
   - component: {fileID: 1489401949}
   m_Layer: 5
-  m_Name: ButtonRed
+  m_Name: ButtonVideo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10065,7 +10043,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 68576cbfd089adc4eae2dfa8e63dd802, type: 3}
+  m_Texture: {fileID: 2800000, guid: 564d23b3aeb32eb478c164f1b25d61f8, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
