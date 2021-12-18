@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4138317907345359811}
   - component: {fileID: 7662828508706055780}
   m_Layer: 5
-  m_Name: Yellow
+  m_Name: TextPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

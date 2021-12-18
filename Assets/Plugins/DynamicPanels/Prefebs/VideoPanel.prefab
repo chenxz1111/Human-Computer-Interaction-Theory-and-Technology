@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4910328077063082328}
   - component: {fileID: 1650672743782384368}
   m_Layer: 5
-  m_Name: VideoPanael
+  m_Name: VideoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: Assets/olymics.mp4
+  m_Url: Assets/Static/olympics.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
