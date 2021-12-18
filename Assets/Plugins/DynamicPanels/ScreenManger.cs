@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DynamicPanels;
+using UnityEngine.UI;
+using System.IO;
 
 public class ScreenManger : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class ScreenManger : MonoBehaviour
     public DynamicPanelsCanvas main_canvas;
 
     private int N = 0;
+
+    public RenderTexture screenshotTex;
 
 
     void Start()
@@ -60,4 +64,41 @@ public class ScreenManger : MonoBehaviour
     {
         tab.Destroy();
     }
+
+    public void OnShowTexture(RectTransform rect)
+    {
+
+        ///要现实的位置 RrctTransform, 转化到屏幕坐标。
+        Vector3 vect = RectTransformUtility.WorldToScreenPoint(Camera.main, rect.gameObject.transform.position);
+        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        CanvasScaler canvasScaler = canvas.GetComponent<CanvasScaler>();
+
+        float radio = Screen.width / canvasScaler.referenceResolution.x;//适配
+        float x = vect.x - rect.sizeDelta.x * rect.pivot.x * radio;
+        float y = vect.y - rect.sizeDelta.y * rect.pivot.x * radio;
+
+
+        Rect targetRect = new Rect(x, y, rect.sizeDelta.x * radio, rect.sizeDelta.y * radio);
+
+
+
+        //Debug.Log(string.Format("x:{0}, y:{1}, width:{2}, height:{3}", targetRect.x, targetRect.y, targetRect.width, targetRect.height));
+
+        //StartCoroutine(UploadPNG());
+
+        //yield return new WaitForEndOfFrame();
+        Texture2D tex = new Texture2D((int)targetRect.width, (int)targetRect.height, TextureFormat.RGB24, false);
+
+        tex.ReadPixels(new Rect((int)targetRect.x, (int)targetRect.y, (int)targetRect.width, (int)targetRect.height), 0, 0);
+        tex.Apply();
+
+        //screenshotTex.
+
+        string path = "Assets/Plugins/DynamicPanels/onMobileSavedScreen.png";
+        Debug.Log(path);
+        File.WriteAllBytes(path, tex.EncodeToPNG());
+
+
+    }
+
 }
