@@ -44,7 +44,7 @@ public class ScreenManger : MonoBehaviour
         Panel panel = PanelUtils.CreatePanelFor(content, main_canvas);
         panel[0].Label = tabLabel;
         panel[0].MinSize = new Vector2(200f, 200f);
-        panel.ResizeTo(new Vector2(300f, panel.MinSize.y));
+        panel.ResizeTo(new Vector2(700f, 700f));
 
 
         //PanelNotificationCenter.OnPanelClosed;
