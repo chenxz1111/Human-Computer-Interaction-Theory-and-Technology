@@ -65,14 +65,16 @@ public class ScreenManger : MonoBehaviour
         tab.Destroy();
     }
 
-    public void screenOn()
+    public void screenOn(int UI_id)
     {
-
+        Transform canvas = this.transform.Find("UI" + UI_id.ToString()).Find("Canvas");
+        canvas.gameObject.SetActive(true);
     }
 
-    public void screenOff()
+    public void screenOff(int UI_id = 0)
     {
-        //main_canvas.
+        Transform canvas = this.transform.Find("UI" + UI_id.ToString()).Find("Canvas");
+        canvas.gameObject.SetActive(false);
     }
 
     public void OnShowTexture(RectTransform rect)
