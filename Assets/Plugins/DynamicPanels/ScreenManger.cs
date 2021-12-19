@@ -65,6 +65,16 @@ public class ScreenManger : MonoBehaviour
         tab.Destroy();
     }
 
+    public void screenOn()
+    {
+
+    }
+
+    public void screenOff()
+    {
+        //main_canvas.
+    }
+
     public void OnShowTexture(RectTransform rect)
     {
 
