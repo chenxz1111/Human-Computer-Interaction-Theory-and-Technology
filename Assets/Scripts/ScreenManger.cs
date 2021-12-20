@@ -13,6 +13,7 @@ public class ScreenManger : MonoBehaviour
     private int N = 0;
 
     public RenderTexture screenshotTex;
+    static Vector2 initSize = new Vector2(700f, 700f);
 
 
     void Start()
@@ -44,7 +45,7 @@ public class ScreenManger : MonoBehaviour
         Panel panel = PanelUtils.CreatePanelFor(content, main_canvas);
         panel[0].Label = tabLabel;
         panel[0].MinSize = new Vector2(200f, 200f);
-        panel.ResizeTo(new Vector2(700f, 700f));
+        panel.ResizeTo(initSize);
 
 
         //PanelNotificationCenter.OnPanelClosed;
@@ -52,6 +53,13 @@ public class ScreenManger : MonoBehaviour
         // panel.MoveToPosition(new Vector2(panel.Size.x + 30 * cycle_N, main_canvas.Size.y - panel.Size.y - 100 - 30 * cycle_N));
         panel.MoveToPosition(new Vector2(30 * cycle_N + 100, main_canvas.Size.y - panel.Size.y - 30 * cycle_N - 100));
         //panel.MoveToPosition(new Vector2(30 * cycle_N, 30 * cycle_N));
+
+        panel.gameObject.AddComponent<PanelDrag>();
+        panel.gameObject.AddComponent<BoxCollider>();
+        BoxCollider collider = panel.gameObject.GetComponent<BoxCollider>();
+        collider.size = new Vector3(initSize.x, initSize.y, 0.001f);
+        collider.center = initSize / 2;
+
     }
 
     private void closePanel(Panel panel)
