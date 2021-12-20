@@ -7,12 +7,13 @@ using Microsoft.MixedReality.Toolkit;
 
 public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
 {
-    bool isPointing;
-    Vector3 downPos;
-    Vector3 dragPos;
-    Vector3 targetPos;
-    Vector3 previousPos;
-    Vector3 res;
+    public static float timeAfterDrag = 999;
+    public static Transform panelOnDrag = null;
+    public bool isPointing;
+    public Vector3 downPos;
+    public Vector3 dragPos;
+    public Vector3 previousPos;
+    //public Vector3 res;
     public float speed = 4f;
     // public float decayRate = 0.6f;
     float distanceRatio = 1.0f;
@@ -37,14 +38,15 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
         objectLocalGrabPoint = Quaternion.Inverse(objectPose.Rotation) * (grabCentroid - objectPose.Position);
         objectLocalGrabPoint = objectLocalGrabPoint.Div(objectScale);
 
-        grabToObject = objectPose.Position - grabCentroid;
+        //grabToObject = objectPose.Position - grabCentroid;
     }
 
-    void Start()
+    public void Start()
     {
         isPointing = false;
         previousPos = transform.position;
         canvasSize = transform.parent.parent.GetComponent<RectTransform>().sizeDelta;
+        Debug.Log("PanelDrag start");
 
     }
 
@@ -65,6 +67,8 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
         final_anchor.x = Mathf.Max(0, Mathf.Min(canvasSize.x - rect.sizeDelta.x, final_anchor.x));
         final_anchor.y = Mathf.Max(0, Mathf.Min(canvasSize.y - rect.sizeDelta.y, final_anchor.y));
         rect.anchoredPosition = final_anchor;
+
+        timeAfterDrag += Time.deltaTime;
     }
 
     private bool withinCanvas(Vector3 pos)
@@ -78,6 +82,7 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
     {
         isPointing = false;
         previousPos = transform.position;
+        timeAfterDrag = 0;
     }
 
     /// <inheritdoc />
@@ -88,6 +93,9 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
         MixedRealityPose pointerPose = new MixedRealityPose(eventData.Pointer.Position, eventData.Pointer.Rotation);
         MixedRealityPose hostPose = new MixedRealityPose(transform.position, transform.rotation);
         Setup(pointerPose, eventData.Pointer.Position, hostPose, transform.localScale);
+
+        MyCanvas.canvasOnFocus = transform.parent.GetComponent<MyCanvas>();
+        panelOnDrag = transform;
     }
 
     private float GetDistanceToBody(MixedRealityPose pointerCentroidPose)
