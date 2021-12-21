@@ -4,6 +4,7 @@ using UnityEngine;
 using DynamicPanels;
 using UnityEngine.UI;
 using System.IO;
+using Microsoft.MixedReality.Toolkit.Input;
 
 public class ScreenManger : MonoBehaviour
 {
@@ -16,12 +17,13 @@ public class ScreenManger : MonoBehaviour
     public RectTransform imagePanel;
     public RectTransform textPanel;
     public RectTransform gamePanel;
+    public GazeProvider gazeProvider;
 
 
     private int N = 0;
 
     public RenderTexture screenshotTex;
-    static Vector2 initSize = new Vector2(700f, 700f);
+    public List<Panel> panel_list = new List<Panel>();
 
 
     void Start()
@@ -32,6 +34,7 @@ public class ScreenManger : MonoBehaviour
 
         createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas1);
         createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas2);
+        PanelDrag.gaze = gazeProvider;
     }
 
     // Update is called once per frame
@@ -55,6 +58,8 @@ public class ScreenManger : MonoBehaviour
     {
         createPanel(gamePanel, new Vector2(700f, 700f), main_canvas);
     }
+
+
 
 
 
@@ -89,6 +94,21 @@ public class ScreenManger : MonoBehaviour
         collider.size = new Vector3(initSize.x, initSize.y, 0.001f);
         collider.center = initSize / 2;
 
+        panel_list.Add(panel);
+
+    }
+    public void closePanelOnFocus()
+    {
+        for(int i = 0; i < panel_list.Count; i++)
+        {
+            if (panel_list[i].transform.GetComponent<PanelDrag>().focus)
+            {
+                Panel panelToClose = panel_list[i];
+                panel_list.RemoveAt(i);
+                closePanel(panelToClose);
+                break;
+            }
+        }
     }
 
     private void closePanel(Panel panel)

@@ -4,6 +4,7 @@ using UnityEngine;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using Microsoft.MixedReality.Toolkit;
+using DynamicPanels;
 
 public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
 {
@@ -18,6 +19,8 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
     // public float decayRate = 0.6f;
     float distanceRatio = 1.0f;
     Vector2 canvasSize;
+    static public GazeProvider gaze;
+    public bool focus;
 
 
     private float pointerRefDistance = 1f;
@@ -43,6 +46,7 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
 
     public void Start()
     {
+        focus = false;
         isPointing = false;
         previousPos = transform.position;
         canvasSize = transform.parent.parent.GetComponent<RectTransform>().sizeDelta;
@@ -69,6 +73,14 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
         rect.anchoredPosition = final_anchor;
 
         timeAfterDrag += Time.deltaTime;
+        if(gaze.GazeTarget == this.gameObject)
+        {
+            focus = true;
+        }
+        else
+        {
+            focus = false;
+        }
     }
 
     private bool withinCanvas(Vector3 pos)
@@ -96,6 +108,8 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
 
         MyCanvas.canvasOnFocus = transform.parent.GetComponent<MyCanvas>();
         panelOnDrag = transform;
+
+        transform.GetComponent<Panel>().BringForward();
     }
 
     private float GetDistanceToBody(MixedRealityPose pointerCentroidPose)
