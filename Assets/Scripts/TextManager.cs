@@ -37,11 +37,11 @@ public class TextManager : MonoBehaviour
 
     public void TemperatureUp()
     {
-        temperature++;
+        if(temperature < 30) temperature++;
     }
     public void TemperatureDown()
     {
-        temperature--;
+        if (temperature > 16) temperature--;
     }
     public void TemperatureChange(int delta)
     {

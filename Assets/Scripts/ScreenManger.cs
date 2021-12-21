@@ -49,7 +49,7 @@ public class ScreenManger : MonoBehaviour
     }
     public void playVideo()
     {
-        createPanel(videoPanel, new Vector2(2400f, 1000f), main_canvas);
+        createPanel(videoPanel, new Vector2(1600f, 1200f), main_canvas);
     }
     public void playGame()
     {
