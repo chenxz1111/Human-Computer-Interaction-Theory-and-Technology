@@ -4,6 +4,7 @@ using UnityEngine;
 using DynamicPanels;
 using UnityEngine.UI;
 using System.IO;
+using Microsoft.MixedReality.Toolkit.Input;
 
 public class ScreenManger : MonoBehaviour
 {
@@ -16,12 +17,16 @@ public class ScreenManger : MonoBehaviour
     public RectTransform imagePanel;
     public RectTransform textPanel;
     public RectTransform gamePanel;
+    public GazeProvider gazeProvider;
+
+    public GameObject clock;
+    public GameObject weather;
 
 
     private int N = 0;
 
     public RenderTexture screenshotTex;
-    static Vector2 initSize = new Vector2(700f, 700f);
+    public List<Panel> panel_list = new List<Panel>();
 
 
     void Start()
@@ -32,6 +37,9 @@ public class ScreenManger : MonoBehaviour
 
         createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas1);
         createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas2);
+        PanelDrag.gaze = gazeProvider;
+        clock.SetActive(false);
+        weather.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,8 +63,6 @@ public class ScreenManger : MonoBehaviour
     {
         createPanel(gamePanel, new Vector2(700f, 700f), main_canvas);
     }
-
-
 
     public void createPanel(RectTransform c, Vector2 initSize, DynamicPanelsCanvas canvas)
     {
@@ -89,6 +95,21 @@ public class ScreenManger : MonoBehaviour
         collider.size = new Vector3(initSize.x, initSize.y, 0.001f);
         collider.center = initSize / 2;
 
+        panel_list.Add(panel);
+
+    }
+    public void closePanelOnFocus()
+    {
+        for(int i = 0; i < panel_list.Count; i++)
+        {
+            if (panel_list[i].transform.GetComponent<PanelDrag>().focus)
+            {
+                Panel panelToClose = panel_list[i];
+                panel_list.RemoveAt(i);
+                closePanel(panelToClose);
+                break;
+            }
+        }
     }
 
     private void closePanel(Panel panel)
@@ -102,16 +123,33 @@ public class ScreenManger : MonoBehaviour
         tab.Destroy();
     }
 
-    public void screenOn(int UI_id)
+    public void mainScreenOn()
     {
-        Transform canvas = this.transform.Find("UI" + UI_id.ToString()).Find("Canvas");
+        Transform canvas = this.transform.Find("UI_main").Find("Canvas");
         canvas.gameObject.SetActive(true);
     }
 
-    public void screenOff(int UI_id = 0)
+    public void mainScreenOff()
     {
-        Transform canvas = this.transform.Find("UI" + UI_id.ToString()).Find("Canvas");
+        Transform canvas = this.transform.Find("UI_main").Find("Canvas");
         canvas.gameObject.SetActive(false);
+    }
+
+    public void showTime()
+    {
+        clock.SetActive(true);
+    }
+    public void hideTime()
+    {
+        clock.SetActive(false);
+    }
+    public void showWeather()
+    {
+        weather.SetActive(true);
+    }
+    public void hideWeather()
+    {
+        weather.SetActive(false);
     }
 
     public void OnShowTexture(RectTransform rect)

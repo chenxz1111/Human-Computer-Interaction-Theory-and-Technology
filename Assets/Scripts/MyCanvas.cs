@@ -16,6 +16,7 @@ public class MyCanvas : MonoBehaviour, IMixedRealityFocusHandler, IMixedRealityP
     private Image image;
     public float dragTimeDelta = 0.6f;
 
+
     private void Awake()
     {
         image = GetComponent<Image>();
