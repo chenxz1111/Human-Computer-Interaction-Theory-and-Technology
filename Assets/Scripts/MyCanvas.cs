@@ -31,7 +31,7 @@ public class MyCanvas : MonoBehaviour, IMixedRealityFocusHandler, IMixedRealityP
     void IMixedRealityFocusHandler.OnFocusEnter(FocusEventData eventData)
     {
         if (PanelDrag.timeAfterDrag < dragTimeDelta && this != canvasOnFocus) {
-            //image.color = color_OnTransmit;
+            image.color = color_OnTransmit;
             Transform panel = PanelDrag.panelOnDrag;
             panel.SetParent(transform);
             panel.localEulerAngles = Vector3.zero;
@@ -43,13 +43,13 @@ public class MyCanvas : MonoBehaviour, IMixedRealityFocusHandler, IMixedRealityP
             // rect.anchoredPosition
             panel.GetComponent<PanelDrag>().Start();
         }
-        //else
-        //    image.color = color_OnHover;
+        else
+            image.color = color_OnHover;
     }
 
     void IMixedRealityFocusHandler.OnFocusExit(FocusEventData eventData)
     {
-        //image.color = color_IdleState;
+        image.color = color_IdleState;
     }
 
     void IMixedRealityPointerHandler.OnPointerDown(
@@ -62,10 +62,10 @@ public class MyCanvas : MonoBehaviour, IMixedRealityFocusHandler, IMixedRealityP
 
     void IMixedRealityPointerHandler.OnPointerClicked(MixedRealityPointerEventData eventData)
     {
-        //image.color = color_OnSelect;
+        image.color = color_OnSelect;
     }
     void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
     {
-        //image.color = color_OnSelect;
+        image.color = color_OnSelect;
     }
 }

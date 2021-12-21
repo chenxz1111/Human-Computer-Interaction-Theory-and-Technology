@@ -9,6 +9,14 @@ public class ScreenManger : MonoBehaviour
 {
     public RectTransform new_content;
     public DynamicPanelsCanvas main_canvas;
+    public DynamicPanelsCanvas back_canvas;
+    public DynamicPanelsCanvas laptop_canvas1;
+    public DynamicPanelsCanvas laptop_canvas2;
+    public RectTransform videoPanel;
+    public RectTransform imagePanel;
+    public RectTransform textPanel;
+    public RectTransform gamePanel;
+
 
     private int N = 0;
 
@@ -21,6 +29,9 @@ public class ScreenManger : MonoBehaviour
         //important
         PanelNotificationCenter.OnPanelClosed += closePanel;
         PanelNotificationCenter.OnTabClosed += closeTab;
+
+        createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas1);
+        createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas2);
     }
 
     // Update is called once per frame
@@ -28,8 +39,26 @@ public class ScreenManger : MonoBehaviour
     {
         
     }
+    public void createText()
+    {
+        createPanel(textPanel, new Vector2(600f, 600f), main_canvas);
+    }
+    public void createImage()
+    {
+        createPanel(imagePanel, new Vector2(400f, 300f), main_canvas);
+    }
+    public void playVideo()
+    {
+        createPanel(videoPanel, new Vector2(2400f, 1000f), main_canvas);
+    }
+    public void playGame()
+    {
+        createPanel(gamePanel, new Vector2(700f, 700f), main_canvas);
+    }
 
-    public void createPanel(RectTransform c)
+
+
+    public void createPanel(RectTransform c, Vector2 initSize, DynamicPanelsCanvas canvas)
     {
         RectTransform content;
         if (c)
@@ -42,7 +71,7 @@ public class ScreenManger : MonoBehaviour
 
         //RectTransform content = new RectTransform();
         string tabLabel = "Panel " + N;
-        Panel panel = PanelUtils.CreatePanelFor(content, main_canvas);
+        Panel panel = PanelUtils.CreatePanelFor(content, canvas);
         panel[0].Label = tabLabel;
         panel[0].MinSize = new Vector2(200f, 200f);
         panel.ResizeTo(initSize);
@@ -51,7 +80,7 @@ public class ScreenManger : MonoBehaviour
         //PanelNotificationCenter.OnPanelClosed;
         int cycle_N = N++ % 8;
         // panel.MoveToPosition(new Vector2(panel.Size.x + 30 * cycle_N, main_canvas.Size.y - panel.Size.y - 100 - 30 * cycle_N));
-        panel.MoveToPosition(new Vector2(30 * cycle_N + 100, main_canvas.Size.y - panel.Size.y - 30 * cycle_N - 100));
+        panel.MoveToPosition(new Vector2(30 * cycle_N + 100, canvas.Size.y - panel.Size.y - 30 * cycle_N - 100));
         //panel.MoveToPosition(new Vector2(30 * cycle_N, 30 * cycle_N));
 
         panel.gameObject.AddComponent<PanelDrag>();
