@@ -8,7 +8,7 @@ public class LightManager : MonoBehaviour
     public Light pointLight;
     public Material onMat;
     public Material offMat;
-    public float changeRate = 1.2f;
+    public float changeRate = 1.5f;
 
     float minIntensity = 0.2f;
     float maxIntensity = 10f;
