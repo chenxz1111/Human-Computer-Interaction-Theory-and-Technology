@@ -30,8 +30,10 @@ public class TextManager : MonoBehaviour
         temp_text.text = "Temperature:  " +  temperature.ToString() + " ¡æ"
                     + "\n" + "Wind Speed:  " + windspeed.ToString() + " level";
 
-        device_text.text = (deviceConnect[0] ? "Device0 Connect: power: 93%" : "No Device") + '\n' +
-                      (deviceConnect[1] ? "Device1 Connect: power: 57% " : "No Device")  ;
+        device_text.text = (deviceConnect[0] ? "Device0 Connect: power: 93%"+ '\n' +
+                                               "Internet access: Tsinghua-Secure" : "No Device") + '\n' +
+                      (deviceConnect[1] ? "Device1 Connect: power: 57% "+ '\n' +
+                                        "Internet access: Tsinghua-5G" : "No Device")  ;
         time += Time.deltaTime;
     }
 
