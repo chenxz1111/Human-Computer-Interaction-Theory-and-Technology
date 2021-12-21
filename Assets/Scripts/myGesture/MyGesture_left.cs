@@ -10,7 +10,7 @@ public class MyGesture_left : GestureWidgetMove1D
     {
         Vector3 delta = now - old;
         Vector3 up = new Vector3(0f, 1f, 0f);
-        return delta.sqrMagnitude > 0.001 && Vector3.Angle(up, Vector3.Cross(delta, gaze.GazeDirection)) < 20f;
+        return delta.sqrMagnitude > 0.0001 && Vector3.Angle(up, Vector3.Cross(delta, gaze.GazeDirection)) < 20f;
     }
 
 }
