@@ -42,8 +42,8 @@ public class ScreenManger : MonoBehaviour
         PanelNotificationCenter.OnPanelClosed += closePanel;
         PanelNotificationCenter.OnTabClosed += closeTab;
 
-        createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas1);
-        createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas2);
+        //createPanel(imagePanel, new Vector2(800f, 600f), laptop_canvas1);
+        createPanel(imagePanel, new Vector2(800f, 600f), laptop_canvas2);
         PanelDrag.gaze = gazeProvider;
         clock.SetActive(false);
         weather.SetActive(false);
@@ -68,6 +68,7 @@ public class ScreenManger : MonoBehaviour
         {
             videoPanelInstance = createPanel(videoPanel, new Vector2(1600f, 1200f), main_canvas);
             videoPlayer = videoPanelInstance.transform.Find("Content").Find("VideoPanel(Clone)").GetComponent<VideoPlayer>();
+            transform.GetComponent<RoomMode>().toRelaxMode();
         }
 
         videoOn = true;
@@ -186,4 +187,18 @@ public class ScreenManger : MonoBehaviour
 
     public void videoPlay() { if (videoOn && (!videoPlayer.isPlaying)) videoPlayer.Play(); }
     public void videoPause() { if (videoOn && videoPlayer.isPlaying) videoPlayer.Pause(); }
+
+    public void broadcast()
+    {
+        for (int i = 0; i < panel_list.Count; i++)
+        {
+            if (panel_list[i].transform.GetComponent<PanelDrag>().focus)
+            {
+                RectTransform rect = panel_list[i].transform.Find("Content").GetChild(0).GetComponent<RectTransform>();
+                createPanel(rect, new Vector2(800f, 600f), laptop_canvas1);
+                createPanel(rect, new Vector2(800f, 600f), laptop_canvas2);
+                break;
+            }
+        }
+    }
 }
