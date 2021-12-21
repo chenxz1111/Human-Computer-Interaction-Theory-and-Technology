@@ -13,7 +13,7 @@ public class MyGesture_indexdown : GestureWidget
             HandPoseUtils.IsMiddleGrabbing(_handedness) &&
             !HandPoseUtils.IsIndexGrabbing(_handedness) &&
             IsPinkyGrabbing(_handedness) &&
-            IsRingGrabbing(_handedness) && (Vector3.Angle(indextip.Position - palmPose.Position, down) < 30f);
+            IsRingGrabbing(_handedness) && (Vector3.Angle(indextip.Position - palmPose.Position, down) < 20f);
         return false;
     }
 }
