@@ -9,13 +9,19 @@ public class TextManager : MonoBehaviour
     int temperature = 26;
     int windspeed = 0;
     float time = 0;
+    public RectTransform[] device = new RectTransform[2];
+    public RectTransform[] deviceEmpty = new RectTransform[2];
 
     public TextMesh device_text;
     private bool[] deviceConnect = new bool[2];
     // Start is called before the first frame update
     void Start()
     {
-
+        for(var i = 0; i < 2; i++)
+        {
+            device[i].gameObject.SetActive(false);
+            deviceEmpty[i].gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -24,8 +30,8 @@ public class TextManager : MonoBehaviour
         temp_text.text = "Temperature:  " +  temperature.ToString() + " ¡æ"
                     + "\n" + "Wind Speed:  " + windspeed.ToString() + " level";
 
-        device_text.text = (deviceConnect[0] ? "Device0 Connect" : "No Device") + '\n' +
-                      (deviceConnect[1] ? "Device1 Connect" : "No Device")  ;
+        device_text.text = (deviceConnect[0] ? "Device0 Connect: power: 93%" : "No Device") + '\n' +
+                      (deviceConnect[1] ? "Device1 Connect: power: 57% " : "No Device")  ;
         time += Time.deltaTime;
     }
 
@@ -59,10 +65,14 @@ public class TextManager : MonoBehaviour
     public void deviceIn(int device_id)
     {
         deviceConnect[device_id] = true;
+        device[device_id].gameObject.SetActive(true);
+        deviceEmpty[device_id].gameObject.SetActive(false);
     }
 
     public void deviceOut(int device_id)
     {
         deviceConnect[device_id] = false;
+        device[device_id].gameObject.SetActive(false);
+        deviceEmpty[device_id].gameObject.SetActive(true);
     }
 }
