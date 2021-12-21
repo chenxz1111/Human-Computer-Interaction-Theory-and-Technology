@@ -6,8 +6,8 @@ public class TextManager : MonoBehaviour
 {
 
     public TextMesh temp_text;
-    int temperature = 26;
-    int windspeed = 0;
+    static public int temperature = 26;
+    static public int windspeed = 0;
     float time = 0;
     public RectTransform[] device = new RectTransform[2];
     public RectTransform[] deviceEmpty = new RectTransform[2];

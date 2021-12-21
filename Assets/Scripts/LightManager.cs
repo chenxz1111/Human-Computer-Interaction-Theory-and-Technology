@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Light pointLight;
+    static public Light pointLight;
+    public Light theLight;
     public Material onMat;
     public Material offMat;
     public float changeRate = 1.5f;
@@ -15,7 +15,9 @@ public class LightManager : MonoBehaviour
 
     void Start()
     {
+        pointLight = theLight;
         lightOn();
+        
     }
 
     public void setLightColor(Color color)
