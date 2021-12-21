@@ -21,6 +21,10 @@ public class ScreenManger : MonoBehaviour
 
     public GameObject clock;
     public GameObject weather;
+    bool videoOn = false;
+    bool gameOn = false;
+    Panel gamePanelInstance = null;
+    Transform canvas2048 = null;
 
 
     private int N = 0;
@@ -61,10 +65,12 @@ public class ScreenManger : MonoBehaviour
     }
     public void playGame()
     {
-        createPanel(gamePanel, new Vector2(700f, 700f), main_canvas);
+        if (!gameOn)
+            canvas2048 = createPanel(gamePanel, new Vector2(700f, 700f), main_canvas).transform.Find("Content").Find("GamePanel(Clone)").Find("2048").Find("Canvas");
+        gameOn = true;
     }
 
-    public void createPanel(RectTransform c, Vector2 initSize, DynamicPanelsCanvas canvas)
+    public Panel createPanel(RectTransform c, Vector2 initSize, DynamicPanelsCanvas canvas)
     {
         RectTransform content;
         if (c)
@@ -96,7 +102,7 @@ public class ScreenManger : MonoBehaviour
         collider.center = initSize / 2;
 
         panel_list.Add(panel);
-
+        return panel;
     }
     public void closePanelOnFocus()
     {
@@ -105,6 +111,11 @@ public class ScreenManger : MonoBehaviour
             if (panel_list[i].transform.GetComponent<PanelDrag>().focus)
             {
                 Panel panelToClose = panel_list[i];
+                if (gamePanelInstance == panelToClose)
+                {
+                    gameOn = false;
+                    gamePanelInstance = null;
+                }
                 panel_list.RemoveAt(i);
                 closePanel(panelToClose);
                 break;
@@ -152,40 +163,9 @@ public class ScreenManger : MonoBehaviour
         weather.SetActive(false);
     }
 
-    public void OnShowTexture(RectTransform rect)
-    {
-
-        ///要现实的位置 RrctTransform, 转化到屏幕坐标。
-        Vector3 vect = RectTransformUtility.WorldToScreenPoint(Camera.main, rect.gameObject.transform.position);
-        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        CanvasScaler canvasScaler = canvas.GetComponent<CanvasScaler>();
-
-        float radio = Screen.width / canvasScaler.referenceResolution.x;//适配
-        float x = vect.x - rect.sizeDelta.x * rect.pivot.x * radio;
-        float y = vect.y - rect.sizeDelta.y * rect.pivot.x * radio;
-
-
-        Rect targetRect = new Rect(x, y, rect.sizeDelta.x * radio, rect.sizeDelta.y * radio);
-
-
-
-        //Debug.Log(string.Format("x:{0}, y:{1}, width:{2}, height:{3}", targetRect.x, targetRect.y, targetRect.width, targetRect.height));
-
-        //StartCoroutine(UploadPNG());
-
-        //yield return new WaitForEndOfFrame();
-        Texture2D tex = new Texture2D((int)targetRect.width, (int)targetRect.height, TextureFormat.RGB24, false);
-
-        tex.ReadPixels(new Rect((int)targetRect.x, (int)targetRect.y, (int)targetRect.width, (int)targetRect.height), 0, 0);
-        tex.Apply();
-
-        //screenshotTex.
-
-        string path = "Assets/Plugins/DynamicPanels/onMobileSavedScreen.png";
-        Debug.Log(path);
-        File.WriteAllBytes(path, tex.EncodeToPNG());
-
-
-    }
+    public void gameUp() { if(gameOn) canvas2048.GetComponent<Smile2048>().onUp(); }
+    public void gameDown() { if (gameOn) canvas2048.GetComponent<Smile2048>().onDown(); }
+    public void gameLeft() { if (gameOn) canvas2048.GetComponent<Smile2048>().onLeft(); }
+    public void gameRight() { if (gameOn) canvas2048.GetComponent<Smile2048>().onRight(); }
 
 }
