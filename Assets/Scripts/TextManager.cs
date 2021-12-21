@@ -47,6 +47,11 @@ public class TextManager : MonoBehaviour
     {
         temperature += delta;
     }
+
+    public void SetTemperature(int t)
+    {
+        temperature = t;
+    }
     public void WindSpeedUp()
     {
         if (windspeed < 5)
