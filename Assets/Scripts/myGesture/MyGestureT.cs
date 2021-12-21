@@ -16,7 +16,7 @@ public class MyGestureT : GestureWidget
             !HandPoseUtils.IsMiddleGrabbing(Handedness.Left) &&
             !HandPoseUtils.IsIndexGrabbing(Handedness.Left) &&
             !IsPinkyGrabbing(Handedness.Left) &&
-            !IsRingGrabbing(Handedness.Left) && indexup.GestureCondition() && Vector3.Angle(indextip.Position - palmPose.Position, down) < 20f ;
+            !IsRingGrabbing(Handedness.Left) && indexup.GestureCondition() && Vector3.Angle(indextip.Position - palmPose.Position, down) < 50f ;
         return false;
     }
 }

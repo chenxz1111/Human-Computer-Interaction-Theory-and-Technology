@@ -36,7 +36,7 @@ public class MyGesture_fistpalm : GestureWidget2Phase
             !HandPoseUtils.IsMiddleGrabbing(_handedness) &&
             !HandPoseUtils.IsIndexGrabbing(_handedness) &&
             !IsPinkyGrabbing(_handedness) &&
-            !IsRingGrabbing(_handedness) && (Vector3.Angle(Vector3.Cross(thumbtip.Position - palmPose.Position, indextip.Position - palmPose.Position), gaze.GazeDirection) < 30f);
+            !IsRingGrabbing(_handedness) && (Vector3.Angle(Vector3.Cross(thumbtip.Position - palmPose.Position, indextip.Position - palmPose.Position), gaze.GazeDirection) < 60f);
         return false;
     }
 }
