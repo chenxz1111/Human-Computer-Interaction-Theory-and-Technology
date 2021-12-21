@@ -5,6 +5,7 @@ using DynamicPanels;
 using UnityEngine.UI;
 using System.IO;
 using Microsoft.MixedReality.Toolkit.Input;
+using UnityEngine.Video;
 
 public class ScreenManger : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class ScreenManger : MonoBehaviour
     bool gameOn = false;
     Panel gamePanelInstance = null;
     Transform canvas2048 = null;
+    public Panel videoPanelInstance = null;
+    public VideoPlayer videoPlayer = null;
 
 
     private int N = 0;
@@ -61,12 +64,20 @@ public class ScreenManger : MonoBehaviour
     }
     public void playVideo()
     {
-        createPanel(videoPanel, new Vector2(1600f, 1200f), main_canvas);
+        if (!videoOn)
+        {
+            videoPanelInstance = createPanel(videoPanel, new Vector2(1600f, 1200f), main_canvas);
+            videoPlayer = videoPanelInstance.transform.Find("Content").Find("VideoPanel(Clone)").GetComponent<VideoPlayer>();
+        }
+
+        videoOn = true;
     }
     public void playGame()
     {
-        if (!gameOn)
-            canvas2048 = createPanel(gamePanel, new Vector2(700f, 700f), main_canvas).transform.Find("Content").Find("GamePanel(Clone)").Find("2048").Find("Canvas");
+        if (!gameOn) {
+            gamePanelInstance = createPanel(gamePanel, new Vector2(700f, 700f), main_canvas);
+            canvas2048 = gamePanelInstance.transform.Find("Content").Find("GamePanel(Clone)").Find("2048").Find("Canvas");
+        }
         gameOn = true;
     }
 
@@ -115,6 +126,11 @@ public class ScreenManger : MonoBehaviour
                 {
                     gameOn = false;
                     gamePanelInstance = null;
+                }
+                if (videoPanelInstance == panelToClose)
+                {
+                    videoOn = false;
+                    videoPanelInstance = null;
                 }
                 panel_list.RemoveAt(i);
                 closePanel(panelToClose);
@@ -168,4 +184,6 @@ public class ScreenManger : MonoBehaviour
     public void gameLeft() { if (gameOn) canvas2048.GetComponent<Smile2048>().onLeft(); }
     public void gameRight() { if (gameOn) canvas2048.GetComponent<Smile2048>().onRight(); }
 
+    public void videoPlay() { if (videoOn && (!videoPlayer.isPlaying)) videoPlayer.Play(); }
+    public void videoPause() { if (videoOn && videoPlayer.isPlaying) videoPlayer.Pause(); }
 }
