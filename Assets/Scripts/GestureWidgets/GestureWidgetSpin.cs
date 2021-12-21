@@ -53,6 +53,7 @@ public abstract class GestureWidgetSpin : Sensor
             {
                 gestureStartTime = DateTime.Now;
                 countDownStarted = true;
+                oldVec = palmPose.Position - wristPose.Position;
             }
             if ((DateTime.Now.Subtract(gestureStartTime).TotalMilliseconds) > 100)
             {
@@ -65,8 +66,8 @@ public abstract class GestureWidgetSpin : Sensor
                     countDownStarted = false;
                     SensorUntrigger();
                 }
+                oldVec = palmPose.Position - wristPose.Position;
             }
-            oldVec = palmPose.Position - wristPose.Position;
         }
         else
         {
