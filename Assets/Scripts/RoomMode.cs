@@ -15,6 +15,7 @@ public class RoomMode : MonoBehaviour
     }
     public void toWorkMode()
     {
+        UnityEngine.Debug.Log("work");
         if (!isWork)
         {
             isWork = true;
@@ -25,6 +26,7 @@ public class RoomMode : MonoBehaviour
     }
     public void toRelaxMode()
     {
+        UnityEngine.Debug.Log("relax");
         if (isWork)
         {
             isWork = false;
