@@ -19,6 +19,9 @@ public class ScreenManger : MonoBehaviour
     public RectTransform gamePanel;
     public GazeProvider gazeProvider;
 
+    public GameObject clock;
+    public GameObject weather;
+
 
     private int N = 0;
 
@@ -35,6 +38,8 @@ public class ScreenManger : MonoBehaviour
         createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas1);
         createPanel(imagePanel, new Vector2(400f, 300f), laptop_canvas2);
         PanelDrag.gaze = gazeProvider;
+        clock.SetActive(false);
+        weather.SetActive(false);
     }
 
     // Update is called once per frame
@@ -58,10 +63,6 @@ public class ScreenManger : MonoBehaviour
     {
         createPanel(gamePanel, new Vector2(700f, 700f), main_canvas);
     }
-
-
-
-
 
     public void createPanel(RectTransform c, Vector2 initSize, DynamicPanelsCanvas canvas)
     {
@@ -122,16 +123,33 @@ public class ScreenManger : MonoBehaviour
         tab.Destroy();
     }
 
-    public void screenOn(int UI_id)
+    public void mainScreenOn()
     {
-        Transform canvas = this.transform.Find("UI" + UI_id.ToString()).Find("Canvas");
+        Transform canvas = this.transform.Find("UI_main").Find("Canvas");
         canvas.gameObject.SetActive(true);
     }
 
-    public void screenOff(int UI_id = 0)
+    public void mainScreenOff()
     {
-        Transform canvas = this.transform.Find("UI" + UI_id.ToString()).Find("Canvas");
+        Transform canvas = this.transform.Find("UI_main").Find("Canvas");
         canvas.gameObject.SetActive(false);
+    }
+
+    public void showTime()
+    {
+        clock.SetActive(true);
+    }
+    public void hideTime()
+    {
+        clock.SetActive(false);
+    }
+    public void showWeather()
+    {
+        weather.SetActive(true);
+    }
+    public void hideWeather()
+    {
+        weather.SetActive(false);
     }
 
     public void OnShowTexture(RectTransform rect)
