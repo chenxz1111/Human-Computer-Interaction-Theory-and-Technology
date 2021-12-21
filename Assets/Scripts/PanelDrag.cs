@@ -75,6 +75,7 @@ public class PanelDrag : MonoBehaviour, IMixedRealityPointerHandler
         timeAfterDrag += Time.deltaTime;
         if(gaze.GazeTarget == this.gameObject)
         {
+            if(!focus) transform.GetComponent<Panel>().BringForward();
             focus = true;
         }
         else
